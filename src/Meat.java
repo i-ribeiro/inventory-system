@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /**
  * A Meat product that can be stored in an Inventory.
@@ -10,5 +11,46 @@
  */
 public class Meat extends FoodItem {
 	
+/* Member Variables */
 	
+	/**
+	 * The name of the farm of origin.
+	 */
+	private String farmName;
+	
+	
+/* Constructors */
+	
+	/**
+	 * Default constructor.
+	 */
+	public Meat() {
+		// TODO: implement Meat::Meat()
+		
+	}
+	
+	
+/* Methods */
+	
+	/**
+	 * Reads from the Scanner object passed in and fills the data member fields of the class with valid data
+	 * @param scanner - user input stream
+	 * @return true if program successfully reads in all fields, otherwise returns false
+	 */
+	@Override
+	public boolean addItem(Scanner scanner) {
+		// TODO: implement Meat::addItem()
+		
+		return false;	// placeholder
+	}
+	
+	/**
+	 * @return all the data members in the class in String format. 
+	 */
+	@Override
+	public String toString() {
+		// TODO: implement Meat::toString()
+		
+		return "";	// placeholder
+	}
 }
