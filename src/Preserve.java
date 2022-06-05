@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -38,9 +39,35 @@ public class Preserve extends FoodItem {
 	 */
 	@Override
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement Preserve::addItem()
 		
-		return false;	// placeholder
+		boolean result = super.addItem(scanner);	// input base class fields
+		if (result == false) return false; 			// early out if base returns false
+		
+		int size = -1;
+		boolean sizeValid = false;
+		
+		
+		/* input jar size */
+		
+		do {
+			try {
+				
+				size = scanner.nextInt();
+				sizeValid = size > 0;
+				if (sizeValid == false)	System.out.println("Size must be greater than zero.");
+				
+			} catch (InputMismatchException e) {
+				
+				System.out.println("Invalid entry");
+				
+			} finally {
+				
+				scanner.nextLine(); // flush buffer
+			}
+			
+		} while (sizeValid == false);
+		
+		return true;
 	}
 	
 	/**
