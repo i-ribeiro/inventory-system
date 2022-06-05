@@ -62,7 +62,6 @@ public class FoodItem implements Comparable<FoodItem> {
 		int quantity = -1;
 		float cost = 0.f, price = 0.f;
 		
-		boolean codeValid = false;
 		boolean nameValid = false;
 		boolean quantityValid = false;
 		boolean costValid = false;
@@ -74,15 +73,6 @@ public class FoodItem implements Comparable<FoodItem> {
 		
 		do {
 			try {
-				
-				/* input code */
-				if (codeValid == false)			// if code has not already been set
-				{
-					System.out.print("Enter the code for the item: ");
-					codeValid = this.inputCode(scanner);
-					
-					if (codeValid == false)	continue;	// if code is still not valid, restart from top
-				}
 				
 				/* input name */
 				if (nameValid == false) {		// if name has not already been set
@@ -144,8 +134,7 @@ public class FoodItem implements Comparable<FoodItem> {
 			
 			
 			inputValid = // input is valid if all fields are valid
-					codeValid
-					&& nameValid
+					nameValid
 					&& quantityValid
 					&& costValid
 					&& priceValid;

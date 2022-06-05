@@ -81,7 +81,6 @@ public class Inventory {
 	
 /* Methods */
 	
-	// TODO: fix missing check for item code already exists
 	/**
 	 * Adds an item to the Inventory array.
 	 * O(n * log * n) time complexity.
@@ -140,12 +139,25 @@ public class Inventory {
 				break;
 			}
 			
+			
 		/* exit loop once toAdd has been initialized */
 		} while(toAdd == null);
 		
 		
+		/* input itemCode and check for duplicates */
+		System.out.print("Enter the code for the item: ");
+		boolean result = toAdd.inputCode(scanner);
+		
+		if (this.alreadyExists(toAdd) != -1 || result == false) {	// unsuccessful if code already exists or if code input fails
+			
+			System.out.println("Item code already exists");
+			return false;
+		}
+		
+		
 		/* initialize new item with input */
-		boolean result = toAdd.addItem(scanner);
+		result = toAdd.addItem(scanner);
+		
 		
 		/* add item if input successful */
 		if (result == true)	this.inventory[this.numItems++] = toAdd;
