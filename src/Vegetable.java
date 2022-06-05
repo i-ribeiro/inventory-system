@@ -43,7 +43,7 @@ public class Vegetable extends FoodItem {
 		
 		if (result == false)	return false;		// early out if base returns false
 		
-		System.out.println("Enter the name of the farm supplier: ");
+		System.out.print("Enter the name of the farm supplier: ");
 		this.farmName = scanner.nextLine();			// input farm name
 		
 		return true;
