@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -31,8 +32,21 @@ public class Inventory {
 	 * Input expected to add a Meat product.
 	 */
 	private static final String ADD_MEAT	= "m";
-
 	
+	
+/* updateQuantity Constants */
+	
+	/**
+	 * Value used to indicate that the update is a buy.
+	 */
+	public static final boolean UPDATE_BUY	= true;
+	
+	/**
+	 * Value used to indicate that the update is a sell.
+	 */
+	public static final boolean UPDATE_SELL	= false;
+	
+
 /* Member Variables */
 	
 	/**
@@ -155,13 +169,59 @@ public class Inventory {
 	 * Reads in an itemCode to update and quantity to update by and updates that item 
 	 * by the input quantity in the Inventory array. 
 	 * @param scanner - user input stream
-	 * @param buyOrSell - whether a buying (true) or selling (false) operation is occurring.
+	 * @param buyOrSell - whether a buying (UPDATE_BUY) or selling (UPDATE_SELL) operation is occurring.
 	 * @return true/false on whether update was successful or not
 	 */
 	public boolean updateQuantity(Scanner scanner, boolean buyOrSell) {
-		// TODO: implement Inventory::updateQuantity()
 		
-		return false;	// placeholder
+		if (this.numItems == 0)	return false;	// early out if there are no items
+		
+		int index = -1;
+		int quantity = -1;
+		
+		/* input item code */
+		
+		FoodItem searchItem = new FoodItem();
+		boolean codeValid = searchItem.inputCode(scanner);
+		
+		if (codeValid == false)	return false;	// unsuccessful if code is not entered
+		
+		index = this.alreadyExists(searchItem);
+		
+		if (index == -1) {		// early out if item not found
+			
+			System.out.println("Code not found in inventory...");
+			return false;
+		}
+		
+		
+		/* input quantity */
+		
+		boolean quantityValid = false;
+			
+		try {
+			
+			System.out.printf("Enter quantity to %s: ", (buyOrSell == UPDATE_BUY) ? "buy" : "sell");
+			quantity = scanner.nextInt();
+			
+			quantityValid = quantity > 0;				// quantity input must be positive and non-zero
+			
+			if (buyOrSell == UPDATE_SELL) quantity *= -1;	// negate quantity if selling
+			
+		} catch(InputMismatchException e) {
+			
+			scanner.nextLine();							// flush buffer on input mismatch
+		}
+		
+		if (quantityValid == false) {					// unsuccessful if quantity is invalid
+			
+			System.out.println("Invalid quantity...");
+			return false;
+		}
+		
+		
+		/* perform update and return result */
+		return this.inventory[index].updateItem(quantity);
 	}
 	
 	/**
