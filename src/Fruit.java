@@ -52,8 +52,10 @@ public class Fruit extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Fruit::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s orchard supplier: %s",
+				super.toString(),
+				this.orchardName);
 	}
 }
