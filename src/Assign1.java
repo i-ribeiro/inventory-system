@@ -64,8 +64,7 @@ public class Assign1 {
 				break;
 				
 			case MENU_DISPLAY:		// display Inventory
-				// TODO: integrate Inventory::toString()
-				System.out.println("MENU_DISPLAY placeholder");
+				System.out.println(inv);
 				break;
 				
 			case MENU_BUY:			// buy a FoodItem
