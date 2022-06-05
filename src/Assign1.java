@@ -50,6 +50,9 @@ public class Assign1 {
 		
 		Inventory inv = new Inventory();	// the Inventory object to test
 		
+		
+		boolean result = false;	// reusable result flag
+		
 		do {
 			
 			displayMenu();
@@ -68,8 +71,8 @@ public class Assign1 {
 				break;
 				
 			case MENU_BUY:			// buy a FoodItem
-				// TODO: integrate Inventory::updateQuantity() - buy
-				System.out.println("MENU_BUY placeholder");
+				result = inv.updateQuantity(keyboard, Inventory.UPDATE_BUY);
+				if (result == false) System.out.println("Error...could not buy item");
 				break;
 				
 			case MENU_SELL:			// sell a FoodItem
