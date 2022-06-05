@@ -82,8 +82,6 @@ public class FoodItem {
 					this.inputCode(scanner);
 					codeValid = true;
 					
-					scanner.nextLine();					// flush buffer
-					
 					if (codeValid == false)	continue;	// if code is still not valid, restart from top
 				}
 				
@@ -105,6 +103,8 @@ public class FoodItem {
 						System.out.println("Quantity must be a positive integer.");
 						continue;
 					}
+					
+					scanner.nextLine();	// flush buffer
 				}
 				
 				/* input cost */
@@ -118,8 +118,11 @@ public class FoodItem {
 						System.out.println("Cost must be a positive value.");
 						continue;
 					}
-				}
 					
+					scanner.nextLine();	// flush buffer
+				}
+				
+				/* input price */
 				if (priceValid == false) {		// if price has not already been set
 					System.out.print("Enter the price of the item: ");
 					price = scanner.nextFloat();
@@ -130,6 +133,8 @@ public class FoodItem {
 						System.out.println("Price must be a positive value.");
 						continue;
 					}
+					
+					scanner.nextLine();	// flush buffer
 				}
 				
 			} catch (InputMismatchException e) {	// warn on input mismatch
@@ -177,11 +182,11 @@ public class FoodItem {
 			
 		} catch (InputMismatchException e) {
 			
+			System.out.println("Invalid entry");
 			result = false;				// invalidate input on input mismatch
 			
 		} finally {
 			
-			System.out.println("Invalid entry");
 			scanner.nextLine();			// flush buffer
 		}
 		
