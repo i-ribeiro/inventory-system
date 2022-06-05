@@ -41,7 +41,7 @@ public class Fruit extends FoodItem {
 		boolean result = super.addItem(scanner);	// input base class fields
 		if (result == false)	return false;		// early out if base returns false
 		
-		System.out.print("Enter the name of the orchard supplier: ")
+		System.out.print("Enter the name of the orchard supplier: ");
 		this.orchardName = scanner.nextLine();
 		
 		return true;
