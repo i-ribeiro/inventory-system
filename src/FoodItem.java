@@ -215,7 +215,7 @@ public class FoodItem {
 	public boolean updateItem(int amount) {
 		
 		/* check if quantity will be negative after update */
-		boolean result = (this.itemQuantityInStock + amount) > 0;
+		boolean result = (this.itemQuantityInStock + amount) >= 0;
 		
 		/* if quantity is valid, update */
 		if (result == true)	this.itemQuantityInStock += amount;
