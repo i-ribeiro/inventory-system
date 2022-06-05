@@ -9,6 +9,29 @@ import java.util.Scanner;
  * CET-CS-Level 3
  */
 public class Inventory {
+
+/* addItem Constants */
+	
+	/**
+	 * Input expected to add a Fruit product.
+	 */
+	private static final String ADD_FRUIT	= "f";
+	
+	/**
+	 * Input expected to add a Vegetable product.
+	 */
+	private static final String ADD_VEG		= "v";
+	
+	/**
+	 * Input expected to add a Preserve product.
+	 */
+	private static final String ADD_PRE		= "p";
+	
+	/**
+	 * Input expected to add a Meat product.
+	 */
+	private static final String ADD_MEAT	= "m";
+
 	
 /* Member Variables */
 	
@@ -44,13 +67,74 @@ public class Inventory {
 	
 	/**
 	 * Adds an item to the Inventory array.
+	 * O(1) time complexity.
 	 * @param scanner - user input stream
 	 * @return true if program successfully reads in all data, otherwise returns false
 	 */
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement Inventory::addItem()
 		
-		return false;	// placeholder
+		/* early out if inventory is full */
+		
+		if (this.numItems >= INV_SIZE) {
+			System.out.println("Inventory full");
+			return false;
+		}
+		
+		
+		/* input item type and initialize toAdd */
+		
+		FoodItem toAdd = null;	// polymorphic item to add to Inventory; initialized based on user input
+		
+		do {
+			
+			/* prompt item type input */
+			
+			System.out.printf(
+					"Do you wish to add a fruit(%s), vegetable(%s), preserve(%s) or meat(%s)? ",
+					ADD_FRUIT,
+					ADD_VEG,
+					ADD_PRE,
+					ADD_MEAT);
+			
+			String choice = scanner.next();	// input choice
+			
+			
+			/* add new item of type input */
+			
+			switch (choice) {
+			case ADD_FRUIT:				// add a Fruit product
+				toAdd = new Fruit();
+				break;
+				
+			case ADD_VEG:				// add a Vegetable product
+				toAdd = new Vegetable();
+				break;
+			
+			case ADD_PRE:				// add a Preserve product
+				toAdd = new Preserve();
+				break;
+				
+			case ADD_MEAT:				// add a Meat product
+				toAdd = new Meat();
+				break;
+				
+			default:					// input is invalid
+				System.out.println("Invalid entry");
+				break;
+			}
+			
+		/* exit loop once toAdd has been initialized */
+		} while(toAdd == null);
+		
+		
+		/* initialize new item with input */
+		boolean result = toAdd.addItem(scanner);
+		
+		/* add item if input successful */
+		if (result == true)	this.inventory[this.numItems++] = toAdd;
+		
+		
+		return result;
 	}
 	
 	/**
