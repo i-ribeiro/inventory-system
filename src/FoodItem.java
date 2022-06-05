@@ -156,6 +156,7 @@ public class FoodItem {
 		/* set fields */
 		
 		this.itemName = name;
+		this.itemQuantityInStock = quantity;
 		this.itemCost = cost;
 		this.itemPrice = price;
 		
