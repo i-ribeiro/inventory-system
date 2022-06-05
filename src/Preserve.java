@@ -75,8 +75,10 @@ public class Preserve extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Preserve::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s size: %d",
+				super.toString(),
+				this.jarSize);
 	}
 }
