@@ -25,8 +25,8 @@ public class Meat extends FoodItem {
 	 * Default constructor.
 	 */
 	public Meat() {
-		// TODO: implement Meat::Meat()
-		
+
+		this.farmName = "Not set";	// initialize with invalid value so it's obvious if addItem() is not called
 	}
 	
 	
