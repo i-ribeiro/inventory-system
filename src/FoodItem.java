@@ -208,9 +208,15 @@ public class FoodItem {
 	 * @return true if successful, otherwise returns false
 	 */
 	public boolean updateItem(int amount) {
-		// TODO: implement FoodItem::updateItem()
 		
-		return false;	// placeholder
+		/* check if quantity will be negative after update */
+		boolean result = (this.itemQuantityInStock + amount) > 0;
+		
+		/* if quantity is valid, update */
+		if (result == true)	this.itemQuantityInStock += amount;
+		
+		/* return result */
+		return result;
 	}
 	
 	/**
