@@ -166,8 +166,11 @@ public class Inventory {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Inventory::toString()
 		
-		return "";	// placeholder
+		StringBuilder sb = new StringBuilder("Inventory:\n");
+		
+		for (int i = 0; i < this.numItems; ++i)		// for each FoodItem in Inventory
+			sb.append(inventory[i] + "\n");					// append the item
+		return sb.toString();
 	}
 }
