@@ -42,8 +42,9 @@ public class FoodItem {
 /* Constructors */
 	
 	public FoodItem() {
-		// TODO: implement FoodItem::FoodItem()
-		
+
+		this.itemCode = -1;
+		this.itemName = "Invalid item";
 	}
 	
 	
