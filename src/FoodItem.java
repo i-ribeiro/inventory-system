@@ -164,9 +164,33 @@ public class FoodItem {
 	 * @return true/false if successful
 	 */
 	public boolean inputCode(Scanner scanner) {
-		// TODO: implement FoodItem::inputCode()
 		
-		return false;	// placeholder
+		boolean result = true;
+		int code = 0;
+		
+		
+		/* input code */
+		
+		try {
+			
+			code = scanner.nextInt();	// input code
+			
+		} catch (InputMismatchException e) {
+			
+			result = false;				// invalidate input on input mismatch
+			
+		} finally {
+			
+			System.out.println("Invalid entry");
+			scanner.nextLine();			// flush buffer
+		}
+		
+		
+		/* set itemCode if valid */
+		if (result)	this.itemCode = code;
+		
+		
+		return result;
 	}
 	
 	/**
