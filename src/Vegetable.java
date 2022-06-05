@@ -24,8 +24,8 @@ public class Vegetable extends FoodItem {
 	 * Default constructor.
 	 */
 	public Vegetable() {
-		// TODO: implement Vegetable::Vegetable()
 		
+		this.farmName = "Not set";
 	}
 	
 	
@@ -38,9 +38,15 @@ public class Vegetable extends FoodItem {
 	 */
 	@Override
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement Vegetable::addItem()
 		
-		return false;	// placeholder
+		boolean result = super.addItem(scanner);	// input fields in base class
+		
+		if (result == false)	return false;		// early out if base returns false
+		
+		System.out.println("Enter the name of the farm supplier: ");
+		this.farmName = scanner.nextLine();			// input farm name
+		
+		return true;
 	}
 	
 	/**
@@ -48,8 +54,10 @@ public class Vegetable extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Vegetable::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s farm supplier: %s",
+				super.toString(),
+				this.farmName);
 	}
 }
