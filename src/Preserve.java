@@ -82,7 +82,7 @@ public class Preserve extends FoodItem {
 	public String toString() {
 		
 		return String.format(
-				"%s size: %d",
+				"%s size: %d mL",
 				super.toString(),
 				this.jarSize);
 	}
