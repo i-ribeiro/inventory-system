@@ -24,8 +24,8 @@ public class Vegetable extends FoodItem {
 	 * Default constructor.
 	 */
 	public Vegetable() {
-		// TODO: implement Vegetable::Vegetable()
 		
+		this.farmName = "Not set";
 	}
 	
 	
