@@ -123,7 +123,7 @@ public class FoodItem {
 				
 				/* input price */
 				if (priceValid == false) {		// if price has not already been set
-					System.out.print("Enter the price of the item: ");
+					System.out.print("Enter the sales price of the item: ");
 					price = scanner.nextFloat();
 					priceValid = price > 0.f;		// price must be positive, non-zero
 					
