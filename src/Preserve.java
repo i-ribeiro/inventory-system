@@ -24,8 +24,8 @@ public class Preserve extends FoodItem {
 	 * Default constructor.
 	 */
 	public Preserve() {
-		// TODO: implement Preserve::Preserve()
 		
+		this.jarSize = -1;	// initialize with invalid value in case addItem() is not called
 	}
 	
 	
