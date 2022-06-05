@@ -224,8 +224,13 @@ public class FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement FoodItem::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"Item: %d %s %d price: %f cost: %f", 
+				this.itemCode, 
+				this.itemName, 
+				this.itemQuantityInStock, 
+				this.itemPrice, 
+				this.itemCost);
 	}
 }
