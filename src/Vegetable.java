@@ -54,8 +54,10 @@ public class Vegetable extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Vegetable::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s farm supplier: %s",
+				super.toString(),
+				this.farmName);
 	}
 }
