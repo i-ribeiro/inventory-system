@@ -22,7 +22,14 @@ public class Assign1 {
 	 * Displays the main menu options.
 	 */
 	public static void displayMenu() {
-		// TODO: print menu options
-		
+
+		System.out.print(
+				"Please select one of the following: \n"
+				+ "1: Add Item to Inventory \n"
+				+ "2: Display Current Inventory \n"
+				+ "3: Buy Item(s) \n"
+				+ "4: Sell Item(s) \n"
+				+ "5: To Exit \n"
+				+ "> ");
 	}
 }
