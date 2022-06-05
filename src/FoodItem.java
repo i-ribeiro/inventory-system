@@ -181,7 +181,7 @@ public class FoodItem {
 			
 		} catch (InputMismatchException e) {
 			
-			System.out.println("Invalid entry");
+			System.out.println("Invalid code");
 			result = false;				// invalidate input on input mismatch
 			
 		} finally {
