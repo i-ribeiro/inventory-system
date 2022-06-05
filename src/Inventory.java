@@ -13,6 +13,11 @@ public class Inventory {
 /* Member Variables */
 	
 	/**
+	 * The maximum size of the Inventory.
+	 */
+	private static final int INV_SIZE = 20;
+	
+	/**
 	 * The collection of FoodItems stored in the Inventory.
 	 */
 	private FoodItem[] inventory;
@@ -29,8 +34,9 @@ public class Inventory {
 	 * Default constructor.
 	 */
 	public Inventory() {
-		// TODO: implement Inventory::Inventory()
 		
+		inventory = new FoodItem[INV_SIZE];		// initialize inventory array with max size
+		numItems = 0;							// no items yet
 	}
 	
 	
