@@ -38,9 +38,15 @@ public class Vegetable extends FoodItem {
 	 */
 	@Override
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement Vegetable::addItem()
 		
-		return false;	// placeholder
+		boolean result = super.addItem(scanner);	// input fields in base class
+		
+		if (result == false)	return false;		// early out if base returns false
+		
+		System.out.println("Enter the name of the farm supplier: ");
+		this.farmName = scanner.nextLine();			// input farm name
+		
+		return true;
 	}
 	
 	/**
