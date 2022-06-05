@@ -76,8 +76,8 @@ public class Assign1 {
 				break;
 				
 			case MENU_SELL:			// sell a FoodItem
-				// TODO: integrate Inventory::updateQuantity() - sell
-				System.out.println("MENU_SELL placeholder");
+				result = inv.updateQuantity(keyboard, Inventory.UPDATE_SELL);
+				if (result == false) System.out.println("Error...could not sell item");
 				break;
 				
 			default:				// invalid choice
