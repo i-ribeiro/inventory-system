@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -79,9 +81,10 @@ public class Inventory {
 	
 /* Methods */
 	
+	// TODO: fix missing check for item code already exists
 	/**
 	 * Adds an item to the Inventory array.
-	 * O(1) time complexity.
+	 * O(n * log * n) time complexity.
 	 * @param scanner - user input stream
 	 * @return true if program successfully reads in all data, otherwise returns false
 	 */
@@ -148,21 +151,22 @@ public class Inventory {
 		if (result == true)	this.inventory[this.numItems++] = toAdd;
 		
 		
+		/* sort by itemCode, null values left at end */
+		Arrays.sort(this.inventory, new SortByItemCode());
+		
 		return result;
 	}
 	
 	/**
 	 * Searches the inventory for a FoodItem with the same itemCode as in the item parameter.
-	 * O(n) time complexity.
+	 * O(n * log * n) time complexity.
 	 * @param item - the FoodItem whose itemCode to search for
 	 * @return the index of the item if it exists or -1.
 	 */
 	public int alreadyExists(FoodItem item) {
 		
-		for (int i = 0; i < this.numItems; ++i)		// for each FoodItem in Inventory, check if any item matches item param
-			if (inventory[i].isEqual(item)) return i;	// return index if found
-		
-		return -1;	// return -1 if no matches found
+		// binary search for item, -1 if not found
+		return Arrays.binarySearch(this.inventory, item, new SortByItemCode());
 	}
 	
 	/**
@@ -237,5 +241,30 @@ public class Inventory {
 		for (int i = 0; i < this.numItems; ++i)		// for each FoodItem in Inventory
 			sb.append(inventory[i] + "\n");					// append the item
 		return sb.toString();
+	}
+}
+
+
+/**
+ * Comparator for FoodItem.
+ * @author Isaac Ribeiro, James Mwangi
+ * Student Number: 040957075
+ * Course: CST8130 - Data Structures
+ * Professor: James Mwangi PhD. 
+ * CET-CS-Level 3
+ */
+class SortByItemCode implements Comparator<FoodItem> {
+
+	@Override
+	/**
+	 * Compare FoodItems by FoodItem::compareTo().
+	 * Null values are considered the greatest.
+	 */
+	public int compare(FoodItem o1, FoodItem o2) {
+
+		if (o1 == null) return 1;
+		if (o2 == null) return -1;
+		
+		return o1.compareTo(o2);
 	}
 }

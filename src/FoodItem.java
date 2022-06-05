@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Professor: James Mwangi PhD. 
  * CET-CS-Level 3
  */
-public class FoodItem {
+public class FoodItem implements Comparable<FoodItem> {
 	
 /* Member Variables */
 	
@@ -237,5 +237,16 @@ public class FoodItem {
 				this.itemQuantityInStock, 
 				this.itemPrice, 
 				this.itemCost);
+	}
+
+
+	/**
+	 * @param o - the other FoodItem to compare with
+	 * @return the comparison between this FoodItem and o
+	 */
+	@Override
+	public int compareTo(FoodItem o) {
+
+		return this.itemCode - o.itemCode;
 	}
 }
