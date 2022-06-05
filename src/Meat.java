@@ -53,8 +53,10 @@ public class Meat extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Meat::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s farm supplier: %s",
+				super.toString(),
+				this.farmName);
 	}
 }
