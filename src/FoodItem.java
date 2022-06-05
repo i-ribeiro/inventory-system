@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -56,9 +57,105 @@ public class FoodItem {
 	 * @return true if program successfully reads in all fields, otherwise returns false
 	 */
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement FoodItem::addItem()
 		
-		return false;	// placeholder
+		String name = "Not set";
+		int quantity = -1;
+		float cost = 0.f, price = 0.f;
+		
+		boolean codeValid = false;
+		boolean nameValid = false;
+		boolean quantityValid = false;
+		boolean costValid = false;
+		boolean priceValid = false;
+		boolean inputValid = false;
+		
+		
+		/* input fields */
+		
+		do {
+			try {
+				
+				/* input code */
+				if (codeValid == false)			// if code has not already been set
+				{
+					System.out.print("Enter the code for the item: ");
+					int code = scanner.nextInt();
+					codeValid = true;
+					
+					scanner.nextLine();					// flush buffer
+					
+					if (codeValid == false)	continue;	// if code is still not valid, restart from top
+				}
+				
+				/* input name */
+				if (nameValid == false) {		// if name has not already been set
+					System.out.print("Enter the name for the item: ");
+					name = scanner.nextLine();
+					nameValid = true;
+				}
+				
+				/* input quantity */
+				if (quantityValid == false) {	// if quantity has not already been set
+					System.out.print("Enter the quantity for the item: ");
+					quantity = scanner.nextInt();
+					quantityValid = quantity > 0;	// quantity must be positive, non-zero
+					
+					if (quantityValid == false) {	// if quantity is still not valid, restart from top
+						
+						System.out.println("Quantity must be a positive integer.");
+						continue;
+					}
+				}
+				
+				/* input cost */
+				if (costValid == false) {		// if cost has not already been set
+					System.out.print("Enter the cost of the item: ");
+					cost = scanner.nextFloat();
+					costValid = cost > 0.f;			// cost must be positive, non-zero
+					
+					if (costValid == false) {		// if cost is still not valid, restart from top
+						
+						System.out.println("Cost must be a positive value.");
+						continue;
+					}
+				}
+					
+				if (priceValid == false) {		// if price has not already been set
+					System.out.print("Enter the price of the item: ");
+					price = scanner.nextFloat();
+					priceValid = price > 0.f;		// price must be positive, non-zero
+					
+					if (priceValid == false) {		// if price is still not valid, restart from top
+						
+						System.out.println("Price must be a positive value.");
+						continue;
+					}
+				}
+				
+			} catch (InputMismatchException e) {	// warn on input mismatch
+				
+				System.out.println("Invalid entry");
+				scanner.nextLine();		// flush buffer
+			}
+			
+			
+			inputValid = // input is valid if all fields are valid
+					codeValid
+					&& nameValid
+					&& quantityValid
+					&& costValid
+					&& priceValid;
+			
+		} while (inputValid == false);	// loop until all fields are valid
+		
+		
+		/* set fields */
+		
+		this.itemName = name;
+		this.itemCost = cost;
+		this.itemPrice = price;
+		
+		return true;
 	}
 	
 	/**
