@@ -79,7 +79,7 @@ public class FoodItem {
 				if (codeValid == false)			// if code has not already been set
 				{
 					System.out.print("Enter the code for the item: ");
-					int code = scanner.nextInt();
+					this.inputCode(scanner);
 					codeValid = true;
 					
 					scanner.nextLine();					// flush buffer
