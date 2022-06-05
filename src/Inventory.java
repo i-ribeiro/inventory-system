@@ -182,6 +182,8 @@ public class Inventory {
 		/* input item code */
 		
 		FoodItem searchItem = new FoodItem();
+		
+		System.out.print("Enter the code for the item: ");
 		boolean codeValid = searchItem.inputCode(scanner);
 		
 		if (codeValid == false)	return false;	// unsuccessful if code is not entered
