@@ -25,8 +25,8 @@ public class Meat extends FoodItem {
 	 * Default constructor.
 	 */
 	public Meat() {
-		// TODO: implement Meat::Meat()
-		
+
+		this.farmName = "Not set";	// initialize with invalid value so it's obvious if addItem() is not called
 	}
 	
 	
@@ -39,9 +39,13 @@ public class Meat extends FoodItem {
 	 */
 	@Override
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement Meat::addItem()
+		boolean result = super.addItem(scanner);	// input base class fields
+		if (result == false)	return false;		// early out if base returns false
 		
-		return false;	// placeholder
+		System.out.print("Enter the name of the farm supplier: ");
+		this.farmName = scanner.nextLine();
+		
+		return true;
 	}
 	
 	/**
@@ -49,8 +53,10 @@ public class Meat extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Meat::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s farm supplier: %s",
+				super.toString(),
+				this.farmName);
 	}
 }
