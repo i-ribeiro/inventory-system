@@ -231,7 +231,7 @@ public class FoodItem {
 	public String toString() {
 		
 		return String.format(
-				"Item: %d %s %d price: %f cost: %f", 
+				"Item: %d %s %d price: %.2f cost: %.2f", 
 				this.itemCode, 
 				this.itemName, 
 				this.itemQuantityInStock, 
