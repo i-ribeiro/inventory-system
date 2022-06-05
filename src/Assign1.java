@@ -48,6 +48,8 @@ public class Assign1 {
 		Scanner keyboard = new Scanner(System.in);
 		int choice = -1;
 		
+		Inventory inv = new Inventory();	// the Inventory object to test
+		
 		do {
 			
 			displayMenu();
@@ -58,8 +60,7 @@ public class Assign1 {
 			case MENU_EXIT:	break;	// handled by outer loop; do not modify
 			
 			case MENU_ADD:			// add a FoodItem to Inventory
-				// TODO: integrate Inventory::addItem()
-				System.out.println("MENU_ADD placeholder");
+				inv.addItem(keyboard);
 				break;
 				
 			case MENU_DISPLAY:		// display Inventory
