@@ -68,6 +68,10 @@ public class Preserve extends FoodItem {
 			
 		} while (sizeValid == false);
 		
+		
+		/* set jar size */
+		this.jarSize = size;
+		
 		return true;
 	}
 	
