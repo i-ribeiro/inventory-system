@@ -24,8 +24,8 @@ public class Fruit extends FoodItem {
 	 * Default constructor.
 	 */
 	public Fruit() {
-		// TODO: implement Fruit::Fruit()
-		
+
+		this.orchardName = "Not set";	// initialize with invalid value so it's obvious if addItem is not called
 	}
 	
 	
