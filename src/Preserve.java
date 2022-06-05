@@ -52,6 +52,7 @@ public class Preserve extends FoodItem {
 		do {
 			try {
 				
+				System.out.print("Enter the size of the jar in millimetres: ");
 				size = scanner.nextInt();
 				sizeValid = size > 0;
 				if (sizeValid == false)	System.out.println("Size must be greater than zero.");
