@@ -24,8 +24,8 @@ public class Fruit extends FoodItem {
 	 * Default constructor.
 	 */
 	public Fruit() {
-		// TODO: implement Fruit::Fruit()
-		
+
+		this.orchardName = "Not set";	// initialize with invalid value so it's obvious if addItem is not called
 	}
 	
 	
@@ -38,9 +38,13 @@ public class Fruit extends FoodItem {
 	 */
 	@Override
 	public boolean addItem(Scanner scanner) {
-		// TODO: implement Fruit::addItem()
+		boolean result = super.addItem(scanner);	// input base class fields
+		if (result == false)	return false;		// early out if base returns false
 		
-		return false;	// placeholder
+		System.out.print("Enter the name of the orchard supplier: ");
+		this.orchardName = scanner.nextLine();
+		
+		return true;
 	}
 	
 	/**
@@ -48,8 +52,10 @@ public class Fruit extends FoodItem {
 	 */
 	@Override
 	public String toString() {
-		// TODO: implement Fruit::toString()
 		
-		return "";	// placeholder
+		return String.format(
+				"%s orchard supplier: %s",
+				super.toString(),
+				this.orchardName);
 	}
 }
