@@ -139,13 +139,16 @@ public class Inventory {
 	
 	/**
 	 * Searches the inventory for a FoodItem with the same itemCode as in the item parameter.
+	 * O(n) time complexity.
 	 * @param item - the FoodItem whose itemCode to search for
 	 * @return the index of the item if it exists or -1.
 	 */
 	public int alreadyExists(FoodItem item) {
-		// TODO: implement Inventory::alreadyExists()
 		
-		return -1;	// placeholder
+		for (int i = 0; i < this.numItems; ++i)		// for each FoodItem in Inventory, check if any item matches item param
+			if (inventory[i].isEqual(item)) return i;	// return index if found
+		
+		return -1;	// return -1 if no matches found
 	}
 	
 	/**
