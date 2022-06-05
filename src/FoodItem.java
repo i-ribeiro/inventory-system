@@ -198,9 +198,8 @@ public class FoodItem {
 	 * @return true if the itemCode of the object being acted on and the item object parameter are the same value
 	 */
 	public boolean isEqual(FoodItem item) {
-		// TODO: implement FoodItem::isEqual()
 		
-		return false;	// placeholder
+		return this.itemCode == item.itemCode;
 	}
 	
 	/**
