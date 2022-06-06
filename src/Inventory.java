@@ -148,7 +148,7 @@ public class Inventory {
 		System.out.print("Enter the code for the item: ");
 		boolean result = toAdd.inputCode(scanner);
 		
-		if (this.alreadyExists(toAdd) != -1 || result == false) {	// unsuccessful if code already exists or if code input fails
+		if (this.alreadyExists(toAdd) >= 0 || result == false) {	// unsuccessful if code already exists or if code input fails
 			
 			System.out.println("Item code already exists");
 			return false;
@@ -173,11 +173,11 @@ public class Inventory {
 	 * Searches the inventory for a FoodItem with the same itemCode as in the item parameter.
 	 * O(n * log * n) time complexity.
 	 * @param item - the FoodItem whose itemCode to search for
-	 * @return the index of the item if it exists or -1.
+	 * @return the index of the item if it exists or negative value.
 	 */
 	public int alreadyExists(FoodItem item) {
 		
-		// binary search for item, -1 if not found
+		// binary search for item, negative if not found
 		return Arrays.binarySearch(this.inventory, item, new SortByItemCode());
 	}
 	
