@@ -1,4 +1,5 @@
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -52,19 +53,14 @@ public class Inventory {
 /* Member Variables */
 	
 	/**
-	 * The maximum size of the Inventory.
+	 * The ensured size of the Inventory.
 	 */
 	private static final int INV_SIZE = 20;
 	
 	/**
 	 * The collection of FoodItems stored in the Inventory.
 	 */
-	private FoodItem[] inventory;
-	
-	/**
-	 * The number of FoodItems in the Inventory.
-	 */
-	private int numItems;
+	private ArrayList<FoodItem> inventory;
 
 	
 /* Constructors */
@@ -74,8 +70,7 @@ public class Inventory {
 	 */
 	public Inventory() {
 		
-		inventory = new FoodItem[INV_SIZE];		// initialize inventory array with max size
-		numItems = 0;							// no items yet
+		inventory = new ArrayList<FoodItem>();		// initialize inventory array
 	}
 	
 	
@@ -91,7 +86,7 @@ public class Inventory {
 		
 		/* early out if inventory is full */
 		
-		if (this.numItems >= INV_SIZE) {
+		if (this.inventory.size() >= INV_SIZE) {
 			System.out.println("Inventory full");
 			return false;
 		}
@@ -160,11 +155,11 @@ public class Inventory {
 		
 		
 		/* add item if input successful */
-		if (result == true)	this.inventory[this.numItems++] = toAdd;
+		if (result == true)	this.inventory.add(toAdd);
 		
 		
 		/* sort by itemCode, null values left at end */
-		Arrays.sort(this.inventory, new SortByItemCode());
+		inventory.sort(new SortByItemCode());
 		
 		return result;
 	}
@@ -178,7 +173,7 @@ public class Inventory {
 	public int alreadyExists(FoodItem item) {
 		
 		// binary search for item, negative if not found
-		return Arrays.binarySearch(this.inventory, item, new SortByItemCode());
+		return Collections.binarySearch(this.inventory, item);
 	}
 	
 	/**
@@ -190,7 +185,7 @@ public class Inventory {
 	 */
 	public boolean updateQuantity(Scanner scanner, boolean buyOrSell) {
 		
-		if (this.numItems == 0)	return false;	// early out if there are no items
+		if (this.inventory.size() == 0)	return false;	// early out if there are no items
 		
 		int index = -1;
 		int quantity = -1;
@@ -239,7 +234,7 @@ public class Inventory {
 		
 		
 		/* perform update and return result */
-		return this.inventory[index].updateItem(quantity);
+		return this.inventory.get(index).updateItem(quantity);
 	}
 	
 	/**
@@ -250,8 +245,8 @@ public class Inventory {
 		
 		StringBuilder sb = new StringBuilder("Inventory:\n");
 		
-		for (int i = 0; i < this.numItems; ++i)		// for each FoodItem in Inventory
-			sb.append(inventory[i] + "\n");					// append the item
+		for (int i = 0; i < this.inventory.size(); ++i)		// for each FoodItem in Inventory
+			sb.append(inventory.get(i) + "\n");					// append the item
 		return sb.toString();
 	}
 }
