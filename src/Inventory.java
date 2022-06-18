@@ -60,6 +60,7 @@ public class Inventory {
 	/**
 	 * Adds an item to the Inventory array.
 	 * O(n * log * n) time complexity.
+	 * NOTE: not sorted if isKb == false
 	 * @param scanner - user input stream
 	 * @param isKb - whether the scanner is a keyboard (true) or file (false)
 	 * @return true if program successfully reads in all data, otherwise returns false
@@ -133,7 +134,7 @@ public class Inventory {
 		
 		
 		/* sort by itemCode if user input */
-		if (isKb) inventory.sort(new SortByItemCode());
+		if (isKb) inventory.sort(new OrderFoodItemByItemCode());
 		
 		return result;
 	}
@@ -322,7 +323,7 @@ public class Inventory {
 		}
 		
 		/* sort inventory */
-		this.inventory.sort(new SortByItemCode());
+		this.inventory.sort(new OrderFoodItemByItemCode());
 	}
 	
 	/**
@@ -360,7 +361,7 @@ public class Inventory {
  * Professor: James Mwangi PhD. 
  * CET-CS-Level 3
  */
-class SortByItemCode implements Comparator<FoodItem> {
+class OrderFoodItemByItemCode implements Comparator<FoodItem> {
 
 	@Override
 	/**
