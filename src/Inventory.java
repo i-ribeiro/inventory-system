@@ -70,7 +70,7 @@ public class Inventory {
 	public Inventory() {
 		
 		inventory = new ArrayList<FoodItem>();		// initialize inventory array
-		inventory.ensureCapacity(INV_SIZE);
+		inventory.ensureCapacity(INV_SIZE);			// ensure minimum inventory size
 	}
 	
 	
@@ -188,31 +188,16 @@ public class Inventory {
 	 */
 	public boolean updateQuantity(Scanner scanner, boolean buyOrSell) {
 		
-		if (this.inventory.size() == 0)	return false;	// early out if there are no items
+		/* find item */
 		
-		int index = -1;
-		int quantity = -1;
+		FoodItem item = this.findItem(scanner);
 		
-		/* input item code */
-		
-		FoodItem searchItem = new FoodItem();
-		
-		System.out.print("Enter the code for the item: ");
-		boolean codeValid = searchItem.inputCode(scanner);
-		
-		if (codeValid == false)	return false;	// unsuccessful if code is not entered
-		
-		index = this.alreadyExists(searchItem);
-		
-		if (index == -1) {		// early out if item not found
-			
-			System.out.println("Code not found in inventory...");
-			return false;
-		}
+		if (item == null) return false;	// early out if item is invalid (item code not found)
 		
 		
 		/* input quantity */
-		
+
+		int quantity = -1;
 		boolean quantityValid = false;
 			
 		try {
@@ -237,7 +222,37 @@ public class Inventory {
 		
 		
 		/* perform update and return result */
-		return this.inventory.get(index).updateItem(quantity);
+		return item.updateItem(quantity);
+	}
+	
+	public FoodItem findItem(Scanner scanner) {
+		
+		if (this.inventory.size() == 0) {
+			System.out.println("Inventory empty.");
+			return null;	// early out if inventory is empty
+		}
+		
+		int index = -1;
+		
+		/* input item code */
+		
+		FoodItem searchItem = new FoodItem();
+		
+		System.out.print("Enter the code for the item: ");
+		boolean codeValid = searchItem.inputCode(scanner);
+		
+		if (codeValid == false)	return null;			// unsuccessful if code is not entered
+		
+		
+		index = this.alreadyExists(searchItem);
+		
+		if (index == -1) {
+			
+			System.out.println("Code not found in inventory...");
+			return null;
+		}
+		
+		return this.inventory.get(index);
 	}
 	
 	/**

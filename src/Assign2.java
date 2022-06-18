@@ -34,9 +34,14 @@ public class Assign2 {
 	private static final int MENU_SELL		= 4;
 	
 	/**
+	 * The menu option to sell a FoodItem.
+	 */
+	private static final int MENU_SEARCH	= 5;
+	
+	/**
 	 * The menu option to exit.
 	 */
-	private static final int MENU_EXIT		= 5;
+	private static final int MENU_EXIT		= 6;
 	
 
 	/**
@@ -80,6 +85,11 @@ public class Assign2 {
 				if (result == false) System.out.println("Error...could not sell item");
 				break;
 				
+			case MENU_SEARCH:		// TODO: search for a FoodItem in Inventory
+				FoodItem item = inv.findItem(keyboard);
+				if (item != null) System.out.printf("%s \n\n", item);
+				break;
+				
 			default:				// invalid choice
 				System.out.println("...Invalid input, please try again...");
 				break;
@@ -102,7 +112,8 @@ public class Assign2 {
 				+ "2: Display Current Inventory \n"
 				+ "3: Buy Item(s) \n"
 				+ "4: Sell Item(s) \n"
-				+ "5: To Exit \n"
+				+ "5: Search for Item \n"
+				+ "6: To Exit \n"
 				+ "> ");
 	}
 	
