@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Professor: James Mwangi PhD. 
  * CET-CS-Level 3
  */
-public class Assign1 {
+public class Assign2 {
 	
 /* Menu Options */
 	
