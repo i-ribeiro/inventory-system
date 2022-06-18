@@ -34,14 +34,24 @@ public class Assign2 {
 	private static final int MENU_SELL		= 4;
 	
 	/**
-	 * The menu option to sell a FoodItem.
+	 * The menu option to search a FoodItem.
 	 */
 	private static final int MENU_SEARCH	= 5;
 	
 	/**
+	 * The menu option to write the Inventory to disk.
+	 */
+	private static final int MENU_SAVE		= 6;
+	
+	/**
+	 * The menu option to load the Inventory from disk.
+	 */
+	private static final int MENU_LOAD		= 7;
+	
+	/**
 	 * The menu option to exit.
 	 */
-	private static final int MENU_EXIT		= 6;
+	private static final int MENU_EXIT		= 8;
 	
 
 	/**
@@ -68,7 +78,7 @@ public class Assign2 {
 			case MENU_EXIT:	break;	// handled by outer loop; do not modify
 			
 			case MENU_ADD:			// add a FoodItem to Inventory
-				inv.addItem(keyboard);
+				inv.addItem(keyboard, true);
 				break;
 				
 			case MENU_DISPLAY:		// display Inventory
@@ -85,9 +95,17 @@ public class Assign2 {
 				if (result == false) System.out.println("Error...could not sell item");
 				break;
 				
-			case MENU_SEARCH:		// TODO: search for a FoodItem in Inventory
+			case MENU_SEARCH:		// search for a FoodItem in Inventory
 				FoodItem item = inv.findItem(keyboard);
 				if (item != null) System.out.printf("%s \n\n", item);
+				break;
+				
+			case MENU_LOAD:			// load inventory
+				inv.load(keyboard);
+				break;
+				
+			case MENU_SAVE:			// save inventory
+				inv.save(keyboard);
 				break;
 				
 			default:				// invalid choice
@@ -113,7 +131,9 @@ public class Assign2 {
 				+ "3: Buy Item(s) \n"
 				+ "4: Sell Item(s) \n"
 				+ "5: Search for Item \n"
-				+ "6: To Exit \n"
+				+ "6: Save Inventory to File \n"
+				+ "7: Read Inventory from File \n"
+				+ "8: To Exit \n"
 				+ "> ");
 	}
 	

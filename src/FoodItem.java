@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -39,13 +40,22 @@ public class FoodItem implements Comparable<FoodItem> {
 	 */
 	private float itemCost;
 	
+	/**
+	 * Item subtype string representation.
+	 */
+	public final String itemType; 
+	
 	
 /* Constructors */
 	
-	public FoodItem() {
-
+	/**
+	 * @param itemType - the type of item this is
+	 */
+	public FoodItem(String itemType) {
+		
 		this.itemCode = -1;
 		this.itemName = "Invalid item";
+		this.itemType = itemType;		// item type set by subclasses via constructor chaining
 	}
 	
 	
@@ -54,9 +64,10 @@ public class FoodItem implements Comparable<FoodItem> {
 	/**
 	 * Reads from the Scanner object passed in and fills the data member fields of the class with valid data
 	 * @param scanner - user input stream
+	 * @param isKb - whether the scanner is a keyboard (true) or file (false)
 	 * @return true if program successfully reads in all fields, otherwise returns false
 	 */
-	public boolean addItem(Scanner scanner) {
+	public boolean addItem(Scanner scanner, boolean isKb) {
 		
 		String name = "Not set";
 		int quantity = -1;
@@ -76,20 +87,20 @@ public class FoodItem implements Comparable<FoodItem> {
 				
 				/* input name */
 				if (nameValid == false) {		// if name has not already been set
-					System.out.print("Enter the name for the item: ");
+					if (isKb) System.out.print("Enter the name for the item: ");
 					name = scanner.nextLine();
 					nameValid = true;
 				}
 				
 				/* input quantity */
 				if (quantityValid == false) {	// if quantity has not already been set
-					System.out.print("Enter the quantity for the item: ");
+					if (isKb) System.out.print("Enter the quantity for the item: ");
 					quantity = scanner.nextInt();
 					quantityValid = quantity > 0;	// quantity must be positive, non-zero
 					
 					if (quantityValid == false) {	// if quantity is still not valid, restart from top
 						
-						System.out.println("Quantity must be a positive integer.");
+						if (isKb) System.out.println("Quantity must be a positive integer.");
 						continue;
 					}
 					
@@ -98,13 +109,13 @@ public class FoodItem implements Comparable<FoodItem> {
 				
 				/* input cost */
 				if (costValid == false) {		// if cost has not already been set
-					System.out.print("Enter the cost of the item: ");
+					if (isKb) System.out.print("Enter the cost of the item: ");
 					cost = scanner.nextFloat();
 					costValid = cost > 0.f;			// cost must be positive, non-zero
 					
 					if (costValid == false) {		// if cost is still not valid, restart from top
 						
-						System.out.println("Cost must be a positive value.");
+						if (isKb) System.out.println("Cost must be a positive value.");
 						continue;
 					}
 					
@@ -113,13 +124,13 @@ public class FoodItem implements Comparable<FoodItem> {
 				
 				/* input price */
 				if (priceValid == false) {		// if price has not already been set
-					System.out.print("Enter the sales price of the item: ");
+					if (isKb) System.out.print("Enter the sales price of the item: ");
 					price = scanner.nextFloat();
 					priceValid = price > 0.f;		// price must be positive, non-zero
 					
 					if (priceValid == false) {		// if price is still not valid, restart from top
 						
-						System.out.println("Price must be a positive value.");
+						if (isKb) System.out.println("Price must be a positive value.");
 						continue;
 					}
 					
@@ -128,7 +139,7 @@ public class FoodItem implements Comparable<FoodItem> {
 				
 			} catch (InputMismatchException e) {	// warn on input mismatch
 				
-				System.out.println("Invalid entry");
+				if (isKb) System.out.println("Invalid entry");
 				scanner.nextLine();		// flush buffer
 			}
 			
@@ -139,7 +150,7 @@ public class FoodItem implements Comparable<FoodItem> {
 					&& costValid
 					&& priceValid;
 			
-		} while (inputValid == false);	// loop until all fields are valid
+		} while (inputValid == false && isKb);	// loop until all fields are valid
 		
 		
 		/* set fields */
@@ -149,15 +160,16 @@ public class FoodItem implements Comparable<FoodItem> {
 		this.itemCost = cost;
 		this.itemPrice = price;
 		
-		return true;
+		return inputValid;
 	}
 	
 	/**
 	 * Reads a valid itemCode from the Scanner object.
 	 * @param scanner - user input stream
+	 * @param isKb - whether the scanner is a keyboard (true) or file (false)
 	 * @return true/false if successful
 	 */
-	public boolean inputCode(Scanner scanner) {
+	public boolean inputCode(Scanner scanner, boolean isKb) {
 		
 		boolean result = true;
 		int code = 0;
@@ -171,7 +183,7 @@ public class FoodItem implements Comparable<FoodItem> {
 			
 		} catch (InputMismatchException e) {
 			
-			System.out.println("Invalid code");
+			if (isKb) System.out.println("Invalid code");
 			result = false;				// invalidate input on input mismatch
 			
 		} finally {
@@ -237,5 +249,20 @@ public class FoodItem implements Comparable<FoodItem> {
 	public int compareTo(FoodItem o) {
 
 		return this.itemCode - o.itemCode;
+	}
+
+
+	/**
+	 * Output all data members in to file.
+	 * @param pw - file stream
+	 */
+	public void serialize(PrintWriter pw) {
+		
+		pw.println(this.itemType);
+		pw.println(this.itemCode);
+		pw.println(this.itemName);
+		pw.println(this.itemQuantityInStock);
+		pw.println(this.itemPrice);
+		pw.println(this.itemCost);
 	}
 }
