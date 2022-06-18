@@ -70,6 +70,7 @@ public class Inventory {
 	public Inventory() {
 		
 		inventory = new ArrayList<FoodItem>();		// initialize inventory array
+		inventory.ensureCapacity(INV_SIZE);
 	}
 	
 	
