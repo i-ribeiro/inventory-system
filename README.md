@@ -26,6 +26,5 @@ Install the latest build [here](https://github.com/i-ribeiro/inventory-system/re
 
 ## USAGE
 
-Follow prompts in-terminal to add items to the inventory, display current inventory, buy/sell items, or exit. 
+Follow prompts in-terminal to add items to the inventory, display current inventory, buy/sell items, or exit.
 
-NOTE: The maximum inventory size is 20 items as per assignment instructions.
