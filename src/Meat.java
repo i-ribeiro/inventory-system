@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -14,6 +15,11 @@ public class Meat extends FoodItem {
 /* Member Variables */
 	
 	/**
+	 * The type of item as a String.
+	 */
+	protected static final String itemType = "m";
+	
+	/**
 	 * The name of the farm of origin.
 	 */
 	private String farmName;
@@ -25,6 +31,7 @@ public class Meat extends FoodItem {
 	 * Default constructor.
 	 */
 	public Meat() {
+		super(itemType);
 
 		this.farmName = "Not set";	// initialize with invalid value so it's obvious if addItem() is not called
 	}
@@ -35,14 +42,15 @@ public class Meat extends FoodItem {
 	/**
 	 * Reads from the Scanner object passed in and fills the data member fields of the class with valid data
 	 * @param scanner - user input stream
+	 * @param isKb - whether the scanner is a keyboard (true) or file (false)
 	 * @return true if program successfully reads in all fields, otherwise returns false
 	 */
 	@Override
-	public boolean addItem(Scanner scanner) {
-		boolean result = super.addItem(scanner);	// input base class fields
+	public boolean addItem(Scanner scanner, boolean isKb) {
+		boolean result = super.addItem(scanner, isKb);	// input base class fields
 		if (result == false)	return false;		// early out if base returns false
 		
-		System.out.print("Enter the name of the farm supplier: ");
+		if (isKb) System.out.print("Enter the name of the farm supplier: ");
 		this.farmName = scanner.nextLine();
 		
 		return true;
@@ -58,5 +66,16 @@ public class Meat extends FoodItem {
 				"%s farm supplier: %s",
 				super.toString(),
 				this.farmName);
+	}
+	
+	/**
+	 * Output all data members in to file.
+	 * @param pw - file stream
+	 */
+	@Override
+	public void serialize(PrintWriter pw) {
+		super.serialize(pw);
+		
+		pw.println(this.farmName);
 	}
 }
