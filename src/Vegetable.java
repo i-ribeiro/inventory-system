@@ -34,16 +34,17 @@ public class Vegetable extends FoodItem {
 	/**
 	 * Reads from the Scanner object passed in and fills the data member fields of the class with valid data
 	 * @param scanner - user input stream
+	 * @param isKb - whether the scanner is a keyboard (true) or file (false)
 	 * @return true if program successfully reads in all fields, otherwise returns false
 	 */
 	@Override
-	public boolean addItem(Scanner scanner) {
+	public boolean addItem(Scanner scanner, boolean isKb) {
 		
-		boolean result = super.addItem(scanner);	// input fields in base class
+		boolean result = super.addItem(scanner, isKb);	// input fields in base class
 		
 		if (result == false)	return false;		// early out if base returns false
 		
-		System.out.print("Enter the name of the farm supplier: ");
+		if (isKb) System.out.print("Enter the name of the farm supplier: ");
 		this.farmName = scanner.nextLine();			// input farm name
 		
 		return true;

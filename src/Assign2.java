@@ -39,14 +39,14 @@ public class Assign2 {
 	private static final int MENU_SEARCH	= 5;
 	
 	/**
-	 * The menu option to load the Inventory from disk.
-	 */
-	private static final int MENU_LOAD		= 6;
-	
-	/**
 	 * The menu option to write the Inventory to disk.
 	 */
-	private static final int MENU_SAVE		= 7;
+	private static final int MENU_SAVE		= 6;
+	
+	/**
+	 * The menu option to load the Inventory from disk.
+	 */
+	private static final int MENU_LOAD		= 7;
 	
 	/**
 	 * The menu option to exit.
@@ -78,7 +78,7 @@ public class Assign2 {
 			case MENU_EXIT:	break;	// handled by outer loop; do not modify
 			
 			case MENU_ADD:			// add a FoodItem to Inventory
-				inv.addItem(keyboard);
+				inv.addItem(keyboard, true);
 				break;
 				
 			case MENU_DISPLAY:		// display Inventory
@@ -100,7 +100,8 @@ public class Assign2 {
 				if (item != null) System.out.printf("%s \n\n", item);
 				break;
 				
-			case MENU_LOAD:			// TODO: load inventory
+			case MENU_LOAD:			// load inventory
+				inv.load(keyboard);
 				break;
 				
 			case MENU_SAVE:			// TODO: save inventory
