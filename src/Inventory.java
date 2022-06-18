@@ -309,6 +309,8 @@ public class Inventory {
 			while (itemScanner.hasNext() && success == true) {
 				
 				success = this.addItem(itemScanner, false);
+				
+				if (success == false) System.out.println("Error encountered while reading the file, aborting...");
 			}
 			
 			itemScanner.close();
