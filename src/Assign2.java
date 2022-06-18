@@ -104,7 +104,8 @@ public class Assign2 {
 				inv.load(keyboard);
 				break;
 				
-			case MENU_SAVE:			// TODO: save inventory
+			case MENU_SAVE:			// save inventory
+				inv.save(keyboard);
 				break;
 				
 			default:				// invalid choice

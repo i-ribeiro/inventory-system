@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,6 +15,11 @@ public class Preserve extends FoodItem {
 /* Member Variables */
 	
 	/**
+	 * The type of item as a String.
+	 */
+	protected static final String itemType = "p";
+	
+	/**
 	 * The size of the preserve jar in millimetres.
 	 */
 	private int jarSize;
@@ -25,6 +31,7 @@ public class Preserve extends FoodItem {
 	 * Default constructor.
 	 */
 	public Preserve() {
+		super(itemType);
 		
 		this.jarSize = -1;	// initialize with invalid value in case addItem() is not called
 	}
@@ -86,5 +93,16 @@ public class Preserve extends FoodItem {
 				"%s size: %d mL",
 				super.toString(),
 				this.jarSize);
+	}
+	
+	/**
+	 * Output all data members in to file.
+	 * @param pw - file stream
+	 */
+	@Override
+	public void serialize(PrintWriter pw) {
+		super.serialize(pw);
+		
+		pw.println(this.jarSize);
 	}
 }

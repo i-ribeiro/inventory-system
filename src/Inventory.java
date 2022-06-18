@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.InputMismatchException;
@@ -15,29 +16,6 @@ import java.util.Scanner;
  * CET-CS-Level 3
  */
 public class Inventory {
-
-/* addItem Constants */
-	
-	/**
-	 * Input expected to add a Fruit product.
-	 */
-	private static final String ADD_FRUIT	= "f";
-	
-	/**
-	 * Input expected to add a Vegetable product.
-	 */
-	private static final String ADD_VEG		= "v";
-	
-	/**
-	 * Input expected to add a Preserve product.
-	 */
-	private static final String ADD_PRE		= "p";
-	
-	/**
-	 * Input expected to add a Meat product.
-	 */
-	private static final String ADD_MEAT	= "m";
-	
 	
 /* updateQuantity Constants */
 	
@@ -98,10 +76,10 @@ public class Inventory {
 			
 			if (isKb) System.out.printf(
 					"Do you wish to add a fruit(%s), vegetable(%s), preserve(%s) or meat(%s)? ",
-					ADD_FRUIT,
-					ADD_VEG,
-					ADD_PRE,
-					ADD_MEAT);
+					Fruit.itemType,
+					Vegetable.itemType,
+					Preserve.itemType,
+					Meat.itemType);
 			
 			String choice = scanner.next();	// input choice
 			
@@ -109,19 +87,19 @@ public class Inventory {
 			/* add new item of type input */
 			
 			switch (choice) {
-			case ADD_FRUIT:				// add a Fruit product
+			case Fruit.itemType:				// add a Fruit product
 				toAdd = new Fruit();
 				break;
 				
-			case ADD_VEG:				// add a Vegetable product
+			case Vegetable.itemType:				// add a Vegetable product
 				toAdd = new Vegetable();
 				break;
 			
-			case ADD_PRE:				// add a Preserve product
+			case Preserve.itemType:				// add a Preserve product
 				toAdd = new Preserve();
 				break;
 				
-			case ADD_MEAT:				// add a Meat product
+			case Meat.itemType:				// add a Meat product
 				toAdd = new Meat();
 				break;
 				
@@ -232,7 +210,7 @@ public class Inventory {
 		
 		/* input item code */
 		
-		FoodItem searchItem = new FoodItem();
+		FoodItem searchItem = new FoodItem(null);
 		
 		System.out.print("Enter the code for the item: ");
 		boolean codeValid = searchItem.inputCode(scanner, true);
@@ -309,7 +287,7 @@ public class Inventory {
 	
 	/**
 	 * Load FoodItems from disk.
-	 * @param scanner
+	 * @param scanner - user input stream
 	 */
 	public void load(Scanner scanner) {
 		
@@ -345,6 +323,31 @@ public class Inventory {
 		
 		/* sort inventory */
 		this.inventory.sort(new SortByItemCode());
+	}
+	
+	/**
+	 * Write FoodItems to file
+	 * @param scanner - user input stream
+	 */
+	public void save(Scanner scanner) {
+		
+		/* prompt path */
+		
+		System.out.print("Enter the filename to save to: ");
+		String path = scanner.nextLine();
+		
+		try {
+			PrintWriter pw = new PrintWriter(path);
+			
+			for (FoodItem item : this.inventory)
+				item.serialize(pw);
+			
+			pw.close();
+			
+		} catch (Exception e) {
+			
+			System.out.println("Cannot write to file specified...");
+		}
 	}
 }
 

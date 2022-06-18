@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -39,13 +40,22 @@ public class FoodItem implements Comparable<FoodItem> {
 	 */
 	private float itemCost;
 	
+	/**
+	 * Item subtype string representation.
+	 */
+	public final String itemType; 
+	
 	
 /* Constructors */
 	
-	public FoodItem() {
-
+	/**
+	 * @param itemType - the type of item this is
+	 */
+	public FoodItem(String itemType) {
+		
 		this.itemCode = -1;
 		this.itemName = "Invalid item";
+		this.itemType = itemType;		// item type set by subclasses via constructor chaining
 	}
 	
 	
@@ -239,5 +249,20 @@ public class FoodItem implements Comparable<FoodItem> {
 	public int compareTo(FoodItem o) {
 
 		return this.itemCode - o.itemCode;
+	}
+
+
+	/**
+	 * Output all data members in to file.
+	 * @param pw - file stream
+	 */
+	public void serialize(PrintWriter pw) {
+		
+		pw.println(this.itemType);
+		pw.println(this.itemCode);
+		pw.println(this.itemName);
+		pw.println(this.itemQuantityInStock);
+		pw.println(this.itemPrice);
+		pw.println(this.itemCost);
 	}
 }

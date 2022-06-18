@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,11 @@ public class Vegetable extends FoodItem {
 /* Member Variables */
 	
 	/**
+	 * The type of item as a String.
+	 */
+	protected static final String itemType = "v";
+	
+	/**
 	 * The name of the farm of origin.
 	 */
 	private String farmName;
@@ -24,6 +30,7 @@ public class Vegetable extends FoodItem {
 	 * Default constructor.
 	 */
 	public Vegetable() {
+		super(itemType);
 		
 		this.farmName = "Not set";
 	}
@@ -60,5 +67,16 @@ public class Vegetable extends FoodItem {
 				"%s farm supplier: %s",
 				super.toString(),
 				this.farmName);
+	}
+	
+	/**
+	 * Output all data members in to file.
+	 * @param pw - file stream
+	 */
+	@Override
+	public void serialize(PrintWriter pw) {
+		super.serialize(pw);
+		
+		pw.println(this.farmName);
 	}
 }
