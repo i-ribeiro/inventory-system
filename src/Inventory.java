@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -172,8 +171,11 @@ public class Inventory {
 	 */
 	public int alreadyExists(FoodItem item) {
 		
+		// early out if inventory is empty
+		if (this.inventory.size() == 0) return -1;
+		
 		// binary search for item, negative if not found
-		return Collections.binarySearch(this.inventory, item);
+		return this.recursiveBinarySearch(this.inventory, item, 0, this.inventory.size() - 1);
 	}
 	
 	/**
@@ -249,6 +251,49 @@ public class Inventory {
 			sb.append(inventory.get(i) + "\n");					// append the item
 		return sb.toString();
 	}
+	
+	/**
+	 * Recursive binary search.
+	 * Based on Lab3 submission.
+	 * @param array - the array to search within 
+	 * @param searchVal - the value to search for
+	 * @param firstIndex - the first index of the remaining values (inclusive)
+	 * @param lastIndex - the last index of the remaining values (inclusive)
+	 * @return the index of the searchVal or -1.
+	 */
+	public int recursiveBinarySearch(ArrayList<FoodItem> array, FoodItem searchVal, int firstIndex, int lastIndex) {
+
+		int middle = (lastIndex - firstIndex) / 2 + firstIndex;
+		int index = -1;
+		
+		// early out if value is out of bounds 
+		if (array.get(firstIndex).compareTo(searchVal) > 0
+			|| array.get(lastIndex).compareTo(searchVal) < 0)
+			return index;
+		
+		// check if value is at firstIndex
+		else if (array.get(firstIndex).compareTo(searchVal) == 0) index = firstIndex;
+		
+		// check if value is at lastIndex
+		else if (array.get(lastIndex).compareTo(searchVal) == 0) index = firstIndex;
+		
+		// check if there are only two elements remaining
+		else if (middle == firstIndex || middle == lastIndex) return index;
+		
+		// check if value is at middle 
+		else if (array.get(middle).compareTo(searchVal) == 0) index = firstIndex = lastIndex = middle;
+		
+		// otherwise, continue pruning
+		
+		// if searchVal is larger than middle value, prune lower half and recurse
+		else if (array.get(middle).compareTo(searchVal) < 0)
+			index = recursiveBinarySearch(array, searchVal, middle + 1, lastIndex);
+		
+		// if searchVal is smaller than middle value, prune upper half and recurse
+		else index = recursiveBinarySearch(array, searchVal, firstIndex, middle - 1);
+		
+		return index;
+	}
 }
 
 
@@ -268,9 +313,6 @@ class SortByItemCode implements Comparator<FoodItem> {
 	 * Null values are considered the greatest.
 	 */
 	public int compare(FoodItem o1, FoodItem o2) {
-
-		if (o1 == null) return 1;
-		if (o2 == null) return -1;
 		
 		return o1.compareTo(o2);
 	}
