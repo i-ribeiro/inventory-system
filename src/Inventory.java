@@ -200,6 +200,11 @@ public class Inventory {
 		return item.updateItem(quantity);
 	}
 	
+	/**
+	 * Find an Item in the Inventory.
+	 * @param scanner - user input stream
+	 * @return - the found Item or null
+	 */
 	public FoodItem findItem(Scanner scanner) {
 		
 		if (this.inventory.size() == 0) {
